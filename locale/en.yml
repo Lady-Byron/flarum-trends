@@ -15,3 +15,8 @@ liplum-trends:
     viewWeight:
       label: View Weight
       help: Weight assigned to the view count in the trending score calculation.
+
+  forum:
+    widget:
+      title: Trending Topics
+      empty: No trending topics yet
