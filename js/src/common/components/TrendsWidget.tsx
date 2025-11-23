@@ -1,4 +1,4 @@
-// js/src/forum/components/TrendsWidget.tsx
+// js/src/common/components/TrendsWidget.tsx
 
 import app from 'flarum/common/app';
 
@@ -11,7 +11,7 @@ import Link from 'flarum/common/components/Link';
 import icon from 'flarum/common/helpers/icon';
 import Discussion from 'flarum/common/models/Discussion';
 
-import { extName } from '../../common/extName';
+import { extName } from '../extName';
 
 interface TrendsWidgetAttrs extends WidgetAttrs {}
 
@@ -77,10 +77,9 @@ export default class TrendsWidget extends Widget<TrendsWidgetAttrs> {
   }
 
   async fetchTrends() {
-    // —— 权限与环境防守 —— //
     const forum = (app as any).forum;
 
-    // 在 admin 的布局预览里，很可能没有 forum 实例，直接不请求
+    // —— admin 布局预览里没有 forum：直接不请求 —— //
     if (!forum || typeof forum.attribute !== 'function') {
       this.loading = false;
       this.trends = [];
@@ -88,7 +87,7 @@ export default class TrendsWidget extends Widget<TrendsWidgetAttrs> {
       return;
     }
 
-    // 没有“查看论坛”权限：不请求、不显示列表
+    // —— 没有“查看论坛”权限：不请求、不显示列表 —— //
     if (!forum.attribute('canViewForum')) {
       this.loading = false;
       this.trends = [];
@@ -98,7 +97,7 @@ export default class TrendsWidget extends Widget<TrendsWidgetAttrs> {
 
     this.loading = true;
 
-    // 读取 widget 显示条数，默认 5
+    // Widget 显示条数（默认 5）
     const rawLimit = forum.attribute('liplum-trends.limit');
     const limit =
       typeof rawLimit === 'number'
@@ -106,9 +105,7 @@ export default class TrendsWidget extends Widget<TrendsWidgetAttrs> {
         : parseInt(rawLimit as string, 10) || 5;
 
     const params: Record<string, any> = {};
-    // 多取一点，过滤后再截断
-    params.limit = limit * 2;
-    // 请求所需关联：tags/state/user
+    params.limit = limit * 2; // 多取一点，过滤后再截断
     params.include = 'tags,state,user';
 
     try {
