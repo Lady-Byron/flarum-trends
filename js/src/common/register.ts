@@ -3,7 +3,7 @@
 import type Application from 'flarum/common/Application';
 import Widgets from 'flarum/extensions/afrux-forum-widgets-core/common/extend/Widgets';
 
-import TrendsWidget from '../forum/components/TrendsWidget';
+import TrendsWidget from './components/TrendsWidget';
 import { extName } from './extName';
 
 export default function registerWidget(app: Application) {
