@@ -1,20 +1,19 @@
 .liplum-trends-widget {
   // 适配 Afrux Widget 的标题样式
-  // 确保标题图标颜色跟随文本，而不是强制主题色
   .AfruxWidgets-Widget-title {
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 8px; // 稍微减小标题下边距，更紧凑
     
     .icon {
-      margin-right: 0; // 移除 Flarum 默认的右边距，使用 gap
-      color: inherit; // 关键：让图标颜色继承标题颜色，不再强制红色/主题色
+      margin-right: 0;
+      color: inherit;
     }
   }
 
   .liplum-trends-content {
-    padding: 5px 0;
+    padding: 0; // 移除外层多余padding，贴边显示
     width: 100%;
 
     .liplum-trends-list {
@@ -27,24 +26,32 @@
 
     .liplum-trends-item {
       margin-bottom: 2px;
+      
+      // 【移动端优化】最后一条去掉底部边距
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     .liplum-trends-link {
       display: flex;
-      align-items: center;
+      align-items: flex-start; // 改为顶部对齐，适应多行标题
       padding: 8px 10px;
-      border-radius: 6px; // 使用 Flarum 圆角变量 @border-radius 亦可
+      border-radius: @border-radius;
       text-decoration: none !important;
-      color: @text-color; // 自动适配深色模式文本
+      color: @text-color;
       transition: all 0.2s ease;
       position: relative;
-      
-      // 使用 @control-bg 代替白色，确保在深色模式下是深灰色背景
       background: @control-bg; 
       cursor: pointer;
 
+      // 【移动端优化】在手机上更紧凑
+      @media @phone {
+        padding: 6px 8px; // 减小内边距
+        min-height: 36px; // 防止太窄不好点，但视觉上变小
+      }
+
       &:hover {
-        // 悬停时混合 5% 的主色调，比纯灰色更现代
         background-color: mix(@primary-color, @control-bg, 5%);
         color: @primary-color;
 
@@ -62,11 +69,16 @@
       .liplum-trends-bullet {
         width: 4px;
         height: 4px;
-        background-color: @muted-color; // Flarum 默认的灰色
+        background-color: @muted-color;
         border-radius: 50%;
-        margin-right: 12px;
+        margin-right: 10px; // 稍微减小间距
+        margin-top: 8px; // 【关键】因为是顶部对齐，圆点需要由于文字行高向下偏移一点
         flex-shrink: 0;
         transition: all 0.2s ease;
+        
+        @media @phone {
+             margin-top: 7px; // 移动端微调
+        }
       }
 
       .liplum-trends-title {
@@ -74,10 +86,23 @@
         font-size: 0.95em;
         font-weight: 500;
         line-height: 1.4;
-        white-space: nowrap;
+        margin-right: 8px;
+        
+        // 【桌面端优化】核心修改：支持最多显示2行，超出省略
+        white-space: normal; // 允许换行
+        display: -webkit-box;
+        -webkit-line-clamp: 2; // 限制显示2行
+        -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-right: 10px;
+        word-break: break-word; // 防止长英文单词撑破布局
+
+        // 【移动端优化】字体稍小一点
+        @media @phone {
+          font-size: 0.9em; // 约等于 13px-14px
+          line-height: 1.35;
+          -webkit-line-clamp: 1; // 移动端如果觉得太挤，可以改回 1 行，或者保持 2 行
+        }
       }
 
       .liplum-trends-stats {
@@ -86,10 +111,13 @@
         opacity: 0.7;
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 3px;
         transition: all 0.2s ease;
-
-        // 修正 Flarum 图标垂直对齐
+        margin-top: 2px; // 配合顶部对齐微调
+        
+        // 防止数字被压缩
+        flex-shrink: 0; 
+        
         .icon {
           font-size: 0.9em;
           line-height: 1; 
