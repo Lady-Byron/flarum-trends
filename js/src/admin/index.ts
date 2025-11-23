@@ -1,37 +1,70 @@
 import app from 'flarum/admin/app';
-import { extName } from '../r';
+import { extName } from '../common/extName';
 
 app.initializers.add(extName, () => {
-  app.extensionData
-    .for(extName)
+  const extension = app.extensionData.for(extName);
+
+  // 原 trends 设置：默认条数 & 热度权重参数
+  extension
     .registerSetting({
-      setting: `${extName}.defaultLimit`,
-      label: app.translator.trans(`${extName}.admin.defaultLimit.label`),
-      help: app.translator.trans(`${extName}.admin.defaultLimit.help`),
-      type: `number`
+      setting: 'liplum-trends.defaultLimit',
+      label: app.translator.trans(
+        'liplum-trends.admin.defaultLimit.label'
+      ),
+      help: app.translator.trans(
+        'liplum-trends.admin.defaultLimit.help'
+      ),
+      type: 'number',
     })
     .registerSetting({
-      setting: `${extName}.commentWeight`,
-      label: app.translator.trans(`${extName}.admin.commentWeight.label`),
-      help: app.translator.trans(`${extName}.admin.commentWeight.help`),
-      type: `number`
+      setting: 'liplum-trends.commentWeight',
+      label: app.translator.trans(
+        'liplum-trends.admin.commentWeight.label'
+      ),
+      help: app.translator.trans(
+        'liplum-trends.admin.commentWeight.help'
+      ),
+      type: 'number',
     })
     .registerSetting({
-      setting: `${extName}.participantWeight`,
-      label: app.translator.trans(`${extName}.admin.participantWeight.label`),
-      help: app.translator.trans(`${extName}.admin.participantWeight.help`),
-      type: `number`
+      setting: 'liplum-trends.participantWeight',
+      label: app.translator.trans(
+        'liplum-trends.admin.participantWeight.label'
+      ),
+      help: app.translator.trans(
+        'liplum-trends.admin.participantWeight.help'
+      ),
+      type: 'number',
     })
     .registerSetting({
-      setting: `${extName}.viewWeight`,
-      label: app.translator.trans(`${extName}.admin.viewWeight.label`),
-      help: app.translator.trans(`${extName}.admin.viewWeight.help`),
-      type: `number`
+      setting: 'liplum-trends.viewWeight',
+      label: app.translator.trans(
+        'liplum-trends.admin.viewWeight.label'
+      ),
+      help: app.translator.trans(
+        'liplum-trends.admin.viewWeight.help'
+      ),
+      type: 'number',
     })
     .registerSetting({
-      setting: `${extName}.daysLimit`,
-      label: app.translator.trans(`${extName}.admin.daysLimit.label`),
-      help: app.translator.trans(`${extName}.admin.daysLimit.help`),
-      type: `number`
+      setting: 'liplum-trends.daysLimit',
+      label: app.translator.trans(
+        'liplum-trends.admin.daysLimit.label'
+      ),
+      help: app.translator.trans(
+        'liplum-trends.admin.daysLimit.help'
+      ),
+      type: 'number',
     })
+    // 新增：Widget 显示条数
+    .registerSetting({
+      setting: 'liplum-trends.limit',
+      label: app.translator.trans(
+        'liplum-trends.admin.widget_limit.label'
+      ),
+      help: app.translator.trans(
+        'liplum-trends.admin.widget_limit.help'
+      ),
+      type: 'number',
+    });
 });
