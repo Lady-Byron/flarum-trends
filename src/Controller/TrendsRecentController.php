@@ -69,7 +69,7 @@ class TrendsRecentController extends AbstractListController
             ->where('is_locked', 0)
             ->where('created_at', '>=', $threshold)
             ->selectRaw(
-                '(? * comment_count) + (? * participant_count) + (? * view_count) * POW(1 - (TIMESTAMPDIFF(HOUR, created_at, ?) / ?), 2) as trending_score',
+                '((? * comment_count) + (? * participant_count) + (? * view_count)) * POW(1 - (TIMESTAMPDIFF(HOUR, created_at, ?) / ?), 2) as trending_score',
                 [$commentWeight, $participantWeight, $viewWeight, $now, $hoursLimit]
             )
             // 权限过滤：仅返回当前用户可见的讨论
