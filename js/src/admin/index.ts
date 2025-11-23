@@ -1,10 +1,35 @@
+// js/src/admin/index.ts
+
 import app from 'flarum/admin/app';
+import commonApp from 'flarum/common/app';
+
+import Widgets from 'flarum/extensions/afrux-forum-widgets-core/common/extend/Widgets';
+import TrendsWidget from '../forum/components/TrendsWidget';
+
 import { extName } from '../common/extName';
 
 app.initializers.add(extName, () => {
+  /**
+   * 1) 在 Afrux Widgets Core 中注册 widget，
+   *    这样后台「布局管理」里才能看到 liplum-trends-widget。
+   *    注意这里用的是 commonApp，而不是 admin app。
+   */
+  new Widgets()
+    .add({
+      key: 'liplum-trends-widget',
+      component: TrendsWidget,
+      isDisabled: false,
+      isUnique: true,
+      placement: 'top',
+      position: 1,
+    })
+    .extend(commonApp, extName);
+
+  /**
+   * 2) 注册扩展设置项（趋势算法参数 + widget 显示数量）
+   */
   const extension = app.extensionData.for(extName);
 
-  // 原 trends 设置：默认条数 & 热度权重参数
   extension
     .registerSetting({
       setting: 'liplum-trends.defaultLimit',
@@ -56,7 +81,7 @@ app.initializers.add(extName, () => {
       ),
       type: 'number',
     })
-    // 新增：Widget 显示条数
+    // Widget 显示条数
     .registerSetting({
       setting: 'liplum-trends.limit',
       label: app.translator.trans(
