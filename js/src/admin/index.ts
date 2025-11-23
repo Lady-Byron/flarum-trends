@@ -7,16 +7,10 @@ import registerWidget from '../common/register';
 import { extName } from '../common/extName';
 
 app.initializers.add(extName, () => {
-  /**
-   * 1) 在 Afrux Widgets Core 中注册 widget，
-   *    这样后台「布局管理」里才能看到 liplum-trends-widget。
-   *    注意这里用的是 commonApp（和旧 widget 扩展保持一致）。
-   */
+  // 1) 在 Afrux Widgets Core 中注册 widget（后台布局管理需要）
   registerWidget(commonApp);
 
-  /**
-   * 2) 注册扩展设置项（趋势算法参数 + widget 显示数量）
-   */
+  // 2) 注册扩展设置项
   const extension = app.extensionData.for(extName);
 
   extension
@@ -70,7 +64,6 @@ app.initializers.add(extName, () => {
       ),
       type: 'number',
     })
-    // Widget 显示条数
     .registerSetting({
       setting: 'liplum-trends.limit',
       label: app.translator.trans(
@@ -82,3 +75,4 @@ app.initializers.add(extName, () => {
       type: 'number',
     });
 });
+
