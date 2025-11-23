@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 8px; // 稍微减小标题下边距，更紧凑
+    margin-bottom: 8px;
     
     .icon {
       margin-right: 0;
@@ -13,7 +13,7 @@
   }
 
   .liplum-trends-content {
-    padding: 0; // 移除外层多余padding，贴边显示
+    padding: 0;
     width: 100%;
 
     .liplum-trends-list {
@@ -26,16 +26,11 @@
 
     .liplum-trends-item {
       margin-bottom: 2px;
-      
-      // 【移动端优化】最后一条去掉底部边距
-      &:last-child {
-        margin-bottom: 0;
-      }
     }
 
     .liplum-trends-link {
       display: flex;
-      align-items: flex-start; // 改为顶部对齐，适应多行标题
+      align-items: flex-start; 
       padding: 8px 10px;
       border-radius: @border-radius;
       text-decoration: none !important;
@@ -45,12 +40,6 @@
       background: @control-bg; 
       cursor: pointer;
 
-      // 【移动端优化】在手机上更紧凑
-      @media @phone {
-        padding: 6px 8px; // 减小内边距
-        min-height: 36px; // 防止太窄不好点，但视觉上变小
-      }
-
       &:hover {
         background-color: mix(@primary-color, @control-bg, 5%);
         color: @primary-color;
@@ -59,10 +48,14 @@
           background-color: @primary-color;
           transform: scale(1.2);
         }
-
-        .liplum-trends-stats {
-          color: @primary-color;
-          opacity: 1;
+        
+        // 桌面端 Hover 时依然不显示评论数，保持简洁
+        // 移动端 Hover 时文字变色
+        @media @phone {
+           .liplum-trends-stats {
+             color: @primary-color;
+             opacity: 1;
+           }
         }
       }
 
@@ -71,14 +64,10 @@
         height: 4px;
         background-color: @muted-color;
         border-radius: 50%;
-        margin-right: 10px; // 稍微减小间距
-        margin-top: 8px; // 【关键】因为是顶部对齐，圆点需要由于文字行高向下偏移一点
+        margin-right: 10px;
+        margin-top: 9px; 
         flex-shrink: 0;
         transition: all 0.2s ease;
-        
-        @media @phone {
-             margin-top: 7px; // 移动端微调
-        }
       }
 
       .liplum-trends-title {
@@ -86,41 +75,39 @@
         font-size: 0.95em;
         font-weight: 500;
         line-height: 1.4;
-        margin-right: 8px;
         
-        // 【桌面端优化】核心修改：支持最多显示2行，超出省略
-        white-space: normal; // 允许换行
+        margin-right: 0;
+        
+        white-space: normal; 
         display: -webkit-box;
-        -webkit-line-clamp: 2; // 限制显示2行
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        word-break: break-word; // 防止长英文单词撑破布局
-
-        // 【移动端优化】字体稍小一点
-        @media @phone {
-          font-size: 0.9em; // 约等于 13px-14px
-          line-height: 1.35;
-          -webkit-line-clamp: 1; // 移动端如果觉得太挤，可以改回 1 行，或者保持 2 行
-        }
+        word-break: break-word;
       }
 
       .liplum-trends-stats {
-        font-size: 0.8em;
-        color: @muted-color;
-        opacity: 0.7;
-        display: flex;
-        align-items: center;
-        gap: 3px;
-        transition: all 0.2s ease;
-        margin-top: 2px; // 配合顶部对齐微调
-        
-        // 防止数字被压缩
-        flex-shrink: 0; 
-        
-        .icon {
-          font-size: 0.9em;
-          line-height: 1; 
+        // 【桌面端】默认隐藏
+        display: none;
+
+        // 【移动端】显示图标和数字
+        @media @phone {
+          display: flex;
+          align-items: center;
+          gap: 3px;
+          font-size: 0.8em;
+          color: @muted-color;
+          opacity: 0.8;
+          margin-left: 8px; // 与标题隔开一点距离
+          margin-top: 2px;  // 微调对齐
+          flex-shrink: 0;   // 防止数字被标题挤压换行
+          transition: all 0.2s ease;
+
+          .icon {
+            font-size: 0.9em;
+            line-height: 1;
+          }
         }
       }
     }
