@@ -9,7 +9,7 @@ import Discussion from 'flarum/common/models/Discussion';
 
 interface TrendsWidgetAttrs extends WidgetAttrs {}
 
-export default class TrendsWidget extends Widget<TrendsWidgetAttrs> {
+export class TrendsWidget extends Widget<TrendsWidgetAttrs> {
   loading = true;
   trends: Discussion[] = [];
 
