@@ -46,17 +46,19 @@ class TrendsRecentController extends AbstractListController
 
         $queryParams = $request->getQueryParams();
 
+        // ⬇️ 修改：键名统一为 lady-byron-trends
         $limit = $this->getFilteredParam(
             $queryParams,
             'limit',
-            (int) $this->settings->get('liplum-trends.defaultLimit', 10)
+            (int) $this->settings->get('lady-byron-trends.defaultLimit', 10)
         );
 
-        // 权重设置
-        $commentWeight     = (float) $this->settings->get('liplum-trends.commentWeight', 1.0);
-        $participantWeight = (float) $this->settings->get('liplum-trends.participantWeight', 0.8);
-        $viewWeight        = (float) $this->settings->get('liplum-trends.viewWeight', 0.5);
-        $daysLimit         = (int) $this->settings->get('liplum-trends.daysLimit', 30);
+        // ⬇️ 修改：权重设置键名统一
+        $commentWeight     = (float) $this->settings->get('lady-byron-trends.commentWeight', 1.0);
+        $participantWeight = (float) $this->settings->get('lady-byron-trends.participantWeight', 0.8);
+        $viewWeight        = (float) $this->settings->get('lady-byron-trends.viewWeight', 0.5);
+        $daysLimit         = (int) $this->settings->get('lady-byron-trends.daysLimit', 30);
+        
         $hoursLimit        = max($daysLimit * 24, 1);
 
         $now       = Carbon::now();
@@ -90,4 +92,3 @@ class TrendsRecentController extends AbstractListController
         );
     }
 }
-
