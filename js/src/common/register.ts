@@ -1,6 +1,6 @@
 import type Application from 'flarum/common/Application';
 import Widgets from 'flarum/extensions/afrux-forum-widgets-core/common/extend/Widgets';
-import TrendsWidget from './components/TrendsWidget';
+import { TrendsWidget } from './components/TrendsWidget';
 
 export default function registerWidget(app: Application) {
   new Widgets()
