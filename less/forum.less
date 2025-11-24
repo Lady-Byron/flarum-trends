@@ -1,4 +1,5 @@
-.liplum-trends-widget {
+/* ⬇️ 修改：根类名 */
+.lady-byron-trends-widget {
   // 适配 Afrux Widget 的标题样式
   .AfruxWidgets-Widget-title {
     display: flex;
@@ -10,11 +11,13 @@
     }
   }
 
-  .liplum-trends-content {
+  /* ⬇️ 修改 */
+  .lady-byron-trends-content {
     padding: 0;
     width: 100%;
 
-    .liplum-trends-list {
+    /* ⬇️ 修改 */
+    .lady-byron-trends-list {
       list-style: none;
       margin: 0;
       padding: 0;
@@ -22,11 +25,13 @@
       flex-direction: column;
     }
 
-    .liplum-trends-item {
+    /* ⬇️ 修改 */
+    .lady-byron-trends-item {
       margin-bottom: 2px;
     }
 
-    .liplum-trends-link {
+    /* ⬇️ 修改 */
+    .lady-byron-trends-link {
       display: flex;
       align-items: flex-start; 
       padding: 8px 4px;
@@ -42,7 +47,8 @@
         background-color: mix(@primary-color, @control-bg, 5%);
         color: @primary-color;
 
-        .liplum-trends-bullet {
+        /* ⬇️ 修改 */
+        .lady-byron-trends-bullet {
           background-color: @primary-color;
           transform: scale(1.2);
         }
@@ -50,14 +56,16 @@
         // 桌面端 Hover 时依然不显示评论数，保持简洁
         // 移动端 Hover 时文字变色
         @media @phone {
-           .liplum-trends-stats {
+           /* ⬇️ 修改 */
+           .lady-byron-trends-stats {
              color: @primary-color;
              opacity: 1;
            }
         }
       }
 
-      .liplum-trends-bullet {
+      /* ⬇️ 修改 */
+      .lady-byron-trends-bullet {
         width: 4px;
         height: 4px;
         background-color: @muted-color;
@@ -68,7 +76,8 @@
         transition: all 0.2s ease;
       }
 
-      .liplum-trends-title {
+      /* ⬇️ 修改 */
+      .lady-byron-trends-title {
         flex: 1;
         font-size: 0.95em;
         font-weight: 500;
@@ -85,7 +94,8 @@
         word-break: break-word;
       }
 
-      .liplum-trends-stats {
+      /* ⬇️ 修改 */
+      .lady-byron-trends-stats {
         // 【桌面端】默认隐藏
         display: none;
 
