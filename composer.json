@@ -1,5 +1,5 @@
 {
-  "name": "lady-byron/trends",
+  "name": "lady-byron/trend",
   "description": "The trending discussions for Flarum",
   "type": "flarum-extension",
   "license": "MIT",
@@ -16,12 +16,12 @@
   },
   "extra": {
     "flarum-extension": {
-      "title": "Trends",
+      "title": "Flop Trend",
       "category": "feature",
       "icon": {
         "name": "fas fa-fire-alt",
-        "backgroundColor": "#ffffff",
-        "color": "#FF4500"
+        "backgroundColor": "#5B8C5A",
+        "color": "#fff"
       }
     }
   }
